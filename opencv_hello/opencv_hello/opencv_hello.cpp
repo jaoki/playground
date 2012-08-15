@@ -43,7 +43,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	// This block 
 			CvCapture *capture;
-		IplImage  *img = cvLoadImage("lena.jpg"); 
+		IplImage  *img = cvLoadImage("TooManyPeople.jpg"); 
 		int       key;
 		char      *filename = "C:\\OpenCV2.2\\data\\haarcascades\\haarcascade_frontalface_alt.xml";
 
