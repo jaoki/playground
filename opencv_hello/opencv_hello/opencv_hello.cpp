@@ -39,29 +39,7 @@ void detectFaces( IplImage *img )
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	int type = 1;
-
-	// This block 
-			CvCapture *capture;
-		IplImage  *img = cvLoadImage("TooManyPeople.jpg"); 
-		int       key;
-		char      *filename = "C:\\OpenCV2.2\\data\\haarcascades\\haarcascade_frontalface_alt.xml";
-
-		cascade = ( CvHaarClassifierCascade* )cvLoad( filename, 0, 0, 0 );
-		storage = cvCreateMemStorage( 0 );
-		// img     = cvLoadImage( "fuji.jpg", 1 ); 
-		
-
-		assert( cascade && storage && img );
-
-		cvNamedWindow( "video", 1 );
-		detectFaces( img );
-		cvWaitKey( 0 );
-		cvDestroyWindow( "video" );
-		cvReleaseImage( &img );
-		cvReleaseHaarClassifierCascade( &cascade );
-		cvReleaseMemStorage( &storage );
-
+	int type = 2;
 
 	if(type == 1){ // Show some fuji.jpg pic
 		IplImage *img = cvLoadImage("fuji.jpg");
@@ -75,9 +53,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	}else if(type == 2){ // face detection example (failed???)
 
 		CvCapture *capture;
-		IplImage  *img = cvLoadImage("fuji.jpg"); 
+		IplImage *img = cvLoadImage("lena.jpg"); 
 		int       key;
-		char      *filename = "C:\OpenCV2.2\data\haarcascades\haarcascade_frontalface_alt.xml";
+		char      *filename = "C:\\OpenCV2.2\\data\\haarcascades\\haarcascade_frontalface_alt.xml";
 
 		cascade = ( CvHaarClassifierCascade* )cvLoad( filename, 0, 0, 0 );
 		storage = cvCreateMemStorage( 0 );
@@ -98,7 +76,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		int i;
 		IplImage *src_img = 0, *src_gray = 0;
-		const char *cascade_name = "C:\OpenCV2.2\data\haarcascades\haarcascade_frontalface_default.xml";
+		const char *cascade_name = "C:\\OpenCV2.2\\data\\haarcascades\\haarcascade_frontalface_alt.xml";
 		CvHaarClassifierCascade *cascade = 0;
 		CvMemStorage *storage = 0;
 		CvSeq *faces;
@@ -110,7 +88,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		};
 
 		// (1)画像を読み込む
-		if (argc < 2 || (src_img = cvLoadImage ("fuji.jpg", CV_LOAD_IMAGE_COLOR)) == 0)
+		//if (argc < 2 || (src_img = cvLoadImage ("lena.jpg", CV_LOAD_IMAGE_COLOR)) == 0)
+		if (argc < 2 || (src_img = cvLoadImage ("lena.jpg")) == 0)
 			return -1;
 		src_gray = cvCreateImage (cvGetSize (src_img), IPL_DEPTH_8U, 1);
 
@@ -128,13 +107,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		// (5)検出された全ての顔位置に，円を描画する
 		for (i = 0; i < (faces ? faces->total : 0); i++) {
-		CvRect *r = (CvRect *) cvGetSeqElem (faces, i);
-		CvPoint center;
-		int radius;
-		center.x = cvRound (r->x + r->width * 0.5);
-		center.y = cvRound (r->y + r->height * 0.5);
-		radius = cvRound ((r->width + r->height) * 0.25);
-		cvCircle (src_img, center, radius, colors[i % 8], 3, 8, 0);
+			CvRect *r = (CvRect *) cvGetSeqElem (faces, i);
+			CvPoint center;
+			int radius;
+			center.x = cvRound (r->x + r->width * 0.5);
+			center.y = cvRound (r->y + r->height * 0.5);
+			radius = cvRound ((r->width + r->height) * 0.25);
+			cvCircle (src_img, center, radius, colors[i % 8], 3, 8, 0);
 		}
 
 		// (6)画像を表示，キーが押されたときに終了
