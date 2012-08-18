@@ -3,4 +3,8 @@ ipch
 opencv_hello.suo
 opencv_hello.sdf
 opencv_hello.opensdf
+target
+.project
+.settings
+.classpath
 
