@@ -33,5 +33,11 @@ SET PATH=C:\opencv_src\build\common\tbb\intel64\vc10;c:\opencv_src\build\bin;c:\
 SET PATH=C:\tools\OpenCV2.2\bin;C:\tools\OpenCV2.2\lib;%PATH_DE%
 
 
+---------------------------
+haar training
+c:\tools\OpenCV2.2\bin\opencv_createsamples.exe -img C:\Users\jaoki\coding\git_playground\opencv_java\src\test\resources\uniqlo.png -vec C:\Users\jaoki\coding\git_playground\opencv_java\src\test\resources\uniqlo.vec
+
+
+c:\tools\OpenCV2.2\bin\opencv_haartraining.exe -data C:\Users\jaoki\coding\git_playground\opencv_java\src\test\resources\data -vec C:\Users\jaoki\coding\git_playground\opencv_java\src\test\resources\uniqlo.vec -bg C:\Users\jaoki\coding\git_playground\opencv_java\src\test\resources\NG.txt -mode ALL
 
 
