@@ -11,7 +11,7 @@
 
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 	
-	<script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+	<script src="http://yui.yahooapis.com/3.6.0/build/yui/yui.js"></script>
 	<script type="text/javascript">
 
 YUI().use('charts', function (Y) 
@@ -48,13 +48,11 @@ YUI().use('charts', function (Y)
 
 
 function changeColors(){
-	var length = $("#piechart .yui3-svgShape").length;
-
 	var colors = ["red", "blue", "green", "purple", "black"];
-	for(var i = 0; i < length; i++){
-		alert("change color!");
-		$("#piechart .yui3-svgShape").attr("fill", colors[i]);
-	}
+
+	$("#piechart .yui3-svgShape").each(function(index){
+		$(this).attr("fill", colors[index]);
+	});
 
 }
 		
