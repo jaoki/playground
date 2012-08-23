@@ -18,21 +18,10 @@ import com.googlecode.javacv.cpp.opencv_objdetect.CvHaarClassifierCascade;
 
 public class Main {
 	public static void main(String[] args) throws InterruptedException{
-//		threeImages();
-		opencv_highgui.CvCapture capture = opencv_highgui.cvCreateCameraCapture(0);
-		if(capture == null){
-			throw new RuntimeException("capture is null");
-		}
-		
-		final CanvasFrame canvas = new CanvasFrame("opencv java");
-
-		while(opencv_highgui.cvWaitKey(1) == -1){
-			IplImage image = opencv_highgui.cvQueryFrame(capture);
-			canvas.showImage(image);
-		}
-		
+		threeImages();
+//		webcam();
 	}
-	
+
 	private static void threeImages() throws InterruptedException{
 		final IplImage image = opencv_highgui.cvLoadImage("C:\\Users\\jaoki\\coding\\git_playground\\opencv_hello\\opencv_hello\\lena.jpg");
 		IplImage edged = opencv_core.cvCreateImage(opencv_core.cvGetSize(image), opencv_core.IPL_DEPTH_8U, 1);
@@ -62,8 +51,23 @@ public class Main {
 		canvas.showImage(edged);
 
 		opencv_core.cvReleaseMemStorage(storage);
-		
 
+	}
+	
+	private static void webcam(){
+		opencv_highgui.CvCapture capture = opencv_highgui.cvCreateCameraCapture(0);
+		if(capture == null){
+			throw new RuntimeException("capture is null");
+		}
+		
+		final CanvasFrame canvas = new CanvasFrame("opencv java");
+
+		while(opencv_highgui.cvWaitKey(1) == -1){
+			IplImage image = opencv_highgui.cvQueryFrame(capture);
+			canvas.showImage(image);
+		}
+		
 		
 	}
+	
 }
