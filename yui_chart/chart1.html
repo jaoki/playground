@@ -2,13 +2,15 @@
 <head>
 	<style type="text/css">
 
-#mychart {
-    width: 600px;
-    height: 400px;
+.charts {
+    width: 400px;
+    height: 300px;
 }
 
 	</style>
 
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	
 	<script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
 	<script type="text/javascript">
 
@@ -22,19 +24,48 @@ YUI().use('charts', function (Y)
         { category: "5/5/2010", values: 5000 }
     ];
     
-	var mychart = new Y.Chart({
+	var linechart = new Y.Chart({
 		dataProvider: myDataValues, 
-		render: "#mychart",
+		render: "#linechart",
 	});
 
+	var pieGraph = new Y.Chart({
+		render:"#piechart", 
+//		categoryKey:"day", 
+//		seriesKeys:["taxes"], 
+		dataProvider:myDataValues, 
+		type:"pie", 
+//		seriesCollection:[
+//			{
+//				categoryKey:"day",
+//				valueKey:"taxes"
+//			}
+//		]
+	});
+
+
 });
+
+
+function changeColors(){
+	var length = $("#piechart .yui3-svgShape").length;
+
+	var colors = ["red", "blue", "green", "purple", "black"];
+	for(var i = 0; i < length; i++){
+		alert("change color!");
+		$("#piechart .yui3-svgShape").attr("fill", colors[i]);
+	}
+
+}
 		
 	</script>
 
 </head>
 
 <body>
-	<div id="mychart"></div>
+	<div class="charts" id="linechart"></div>
+	<div class="charts" id="piechart"></div>
+	<button type="button" onClick="changeColors();">change color</button>
 </body>
 
 </html>
