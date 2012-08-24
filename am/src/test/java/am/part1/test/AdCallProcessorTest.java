@@ -7,8 +7,11 @@ import am.part1.AdCallProcessor;
 
 public class AdCallProcessorTest {
 	
-	private static final float ALLOWANCE = 0.1f;
+	private static final float ALLOWANCE = 0.1f; // this will give 10% allowance on the weight based calculation.
 	
+	/**
+	 * when placement id is 1, ad_id always should be 100.
+	 */
 	@Test
 	public void testPlacementId1(){
 		AdCallProcessor processor = new AdCallProcessor();
@@ -18,6 +21,7 @@ public class AdCallProcessorTest {
 
 	}
 
+	// they define a percentage of ad id upon each placement id when placementid is 2
 	private static final float EXPECTED_PLACEMENTID2_ADID100_MAX_PERCENTAGE = (10f/50f) * (1f + ALLOWANCE);
 	private static final float EXPECTED_PLACEMENTID2_ADID100_MIN_PERCENTAGE = (10f/50f) * (1f - ALLOWANCE);
 	private static final float EXPECTED_PLACEMENTID2_ADID101_MAX_PERCENTAGE = (20f/50f) * (1f + ALLOWANCE);
@@ -64,6 +68,7 @@ public class AdCallProcessorTest {
 
 	}
 
+	// they define a percentage of ad id upon each placement id when placementid is 3
 	private static final float EXPECTED_PLACEMENTID3_ADID100_MAX_PERCENTAGE = (15f/20f) * (1f + ALLOWANCE);
 	private static final float EXPECTED_PLACEMENTID3_ADID100_MIN_PERCENTAGE = (15f/20f) * (1f - ALLOWANCE);
 	private static final float EXPECTED_PLACEMENTID3_ADID103_MAX_PERCENTAGE = (5f/20f) * (1f + ALLOWANCE);

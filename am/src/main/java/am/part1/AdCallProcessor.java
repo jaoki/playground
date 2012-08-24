@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import am.part1.Data.PlacementAdMapping;
-
 public class AdCallProcessor {
 
 	public PlacementAdMapping[] getAdsForPlacement(int placement_id){
 		List<PlacementAdMapping> ads = new ArrayList<PlacementAdMapping>();
 		
-		PlacementAdMapping[] data = Data.data;
+		PlacementAdMapping[] data = PlacementAdMapping.getData();
 
 		for(PlacementAdMapping item: data){
 			if(item.placement_id == placement_id){

@@ -9,10 +9,10 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	int type = 2;
+	int type = 4;
 
 	IplImage *jpgimg = cvLoadImage("lena.jpg"); 
-	const char *haarFile = "C:\\OpenCV2.2\\data\\haarcascades\\haarcascade_frontalface_alt.xml";
+	const char *haarFile = "C:\\tools\\OpenCV2.2\\data\\haarcascades\\haarcascade_frontalface_alt.xml";
 	CvHaarClassifierCascade *cascade = ( CvHaarClassifierCascade* )cvLoad( haarFile, 0, 0, 0 );
 	cvNamedWindow("opencv test", CV_WINDOW_NORMAL);
 
@@ -103,6 +103,35 @@ int _tmain(int argc, _TCHAR* argv[])
 		// cvDestroyWindow ("Face Detection");
 		cvReleaseImage (&src_gray);
 		cvReleaseMemStorage (&storage);
+
+	}else if(type == 4){ // video
+		CvCapture* capture = cvCreateCameraCapture(0);
+		CvMemStorage *storage = cvCreateMemStorage( 0 );
+
+		while(1){
+			IplImage *frame = cvQueryFrame(capture);
+			CvSeq *faces = cvHaarDetectObjects(
+					frame,
+					cascade,
+					storage,
+					1.1,
+					3,
+					0 /*CV_HAAR_DO_CANNY_PRUNNING*/,
+					cvSize( 40, 40 ) );
+
+			int i;
+			for( i = 0 ; i < ( faces ? faces->total : 0 ) ; i++ ) {
+				CvRect *r = ( CvRect* )cvGetSeqElem( faces, i );
+				cvRectangle( frame,
+							 cvPoint( r->x, r->y ),
+							 cvPoint( r->x + r->width, r->y + r->height ),
+							 CV_RGB( 255, 0, 0 ), 1, 8, 0 );
+			}
+	 
+			cvShowImage( "opencv test", frame);
+			if ( (cvWaitKey(10) & 255) == 27 ) break;
+		}
+
 
 	}else{ // show Hello World
 //		cvNamedWindow( "My Window", 1 );
