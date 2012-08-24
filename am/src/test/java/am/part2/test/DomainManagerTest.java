@@ -1,4 +1,4 @@
-package am.part1.test;
+package am.part2.test;
 
 import junit.framework.Assert;
 
