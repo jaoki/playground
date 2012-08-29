@@ -84,6 +84,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cprapra.cpp" />
     <ClCompile Include="opencv_hello.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>

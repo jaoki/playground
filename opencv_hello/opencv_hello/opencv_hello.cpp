@@ -1,5 +1,8 @@
 ﻿// opencv_hello.cpp : Defines the entry point for the console application.
 //
+#include "stdafx.cpp"
+
+#ifdef OPENCV_HELLO
 
 #include "stdafx.h"
 
@@ -9,11 +12,14 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	int type = 4;
+	int type = 5;
 
 	IplImage *jpgimg = cvLoadImage("lena.jpg"); 
+	IplImage *kurenai = cvLoadImage("kurenai.jpg"); 
 	const char *haarFile = "C:\\tools\\OpenCV2.2\\data\\haarcascades\\haarcascade_frontalface_alt.xml";
+	const char *haarFileHana = "C:\\tools\\OpenCV2.2\\data\\haarcascades\\haarcascade_mcs_nose.xml";
 	CvHaarClassifierCascade *cascade = ( CvHaarClassifierCascade* )cvLoad( haarFile, 0, 0, 0 );
+	CvHaarClassifierCascade *cascadeHana = ( CvHaarClassifierCascade* )cvLoad( haarFileHana, 0, 0, 0 );
 	cvNamedWindow("opencv test", CV_WINDOW_NORMAL);
 
 	if(type == 1){ // Show some jpg pic
@@ -133,6 +139,51 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 
 
+	}else if(type == 5){ // video
+		CvCapture* capture = cvCreateCameraCapture(0);
+		CvMemStorage *storage = cvCreateMemStorage( 0 );
+
+		while(1){
+			IplImage *frame = cvQueryFrame(capture);
+			CvSeq *faces = cvHaarDetectObjects(
+					frame,
+					cascadeHana,
+					storage,
+					1.1,
+					3,
+					0 /*CV_HAAR_DO_CANNY_PRUNNING*/,
+					cvSize( 40, 40 ) );
+
+			int i;
+			for( i = 0 ; i < ( faces ? faces->total : 0 ) ; i++ ) {
+				CvRect *r = ( CvRect* )cvGetSeqElem( faces, i );
+				CvRect rect = cvRect(r->x, r->y, r->width, r->height);
+//				IplImage *img2 = cvCreateImage(cvSize( r->height, r->width),
+//									   IPL_DEPTH_8U,
+//									   1);
+
+				cvSetImageROI(frame, rect);
+				IplImage *kurenai2 = cvCreateImage(cvGetSize(frame),
+                               frame->depth,
+                               frame->nChannels);
+				cvResize(kurenai, kurenai2);
+				cvCopy(kurenai2, frame, 0);
+//				cvFlip(frame, kurenai, 0);
+//				cvCopy(frame, kurenai, NULL);
+				cvResetImageROI(frame);
+				
+				
+//				cvRectangle( frame,
+//							 cvPoint( r->x, r->y+20 ),
+//							 cvPoint( r->x + r->width, r->y + r->height ),
+//							 CV_RGB( 0, 0, 0 ), 1, 8, 0 );
+			}
+	 
+			cvShowImage( "opencv test", frame);
+			if ( (cvWaitKey(10) & 255) == 27 ) break;
+		}
+
+
 	}else{ // show Hello World
 //		cvNamedWindow( "My Window", 1 );
 		IplImage *newimg = cvCreateImage( cvSize( 640, 480 ), IPL_DEPTH_8U, 1 );
@@ -153,6 +204,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	return 0;
 
 }
+
+#endif
 
 
 

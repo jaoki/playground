@@ -4,5 +4,8 @@
 
 #include "stdafx.h"
 
+#define OPENCV_HELLO
+// #define CPRAPRA
+
 // TODO: reference any additional headers you need in STDAFX.H
 // and not in this file
