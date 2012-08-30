@@ -1,2 +1,18 @@
 <h1><%= title %></h1>
+<%= hostname %>
 <p>Welcome to <%= title %></p>
+
+<a
+		onclick="alert('Drag and drop this link to bookmark bar'); return false;" 
+		href="javascript:void((function(){var e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://<%= hostname %>:3000/javascripts/test.js');document.body.appendChild(e)})());"
+		title="Videogram It!">
+	<strong>Videogram It!</strong><span></span>
+</a>
+
+
+
+
+<div class="highslide-html-content" style="position: relative; display: block; direction: ltr; width: auto; border: none; height: auto; visibility: visible; "><div class="highslide-header"><ul><li class="highslide-previous"><a href="#" title="Previous (arrow left)" onclick="return hs.previous(this)"><span>Previous</span></a></li><li class="highslide-next"><a href="#" title="Next (arrow right)" onclick="return hs.next(this)"><span>Next</span></a></li><li class="highslide-move"><a href="#" title="Move" onclick="return false"><span>Move</span></a></li><li class="highslide-close"><a href="#" title="Close (esc)" onclick="return hs.close(this)"><span>Close</span></a></li></ul></div><div class="highslide-body" style="width: 400px; height: 547px; "><iframe name="hs1346279057044" frameborder="0" key="0" style="width: 400px; height: 547px; " onload="if (hs.expanders[0]) hs.expanders[0].contentLoaded()" src="http://www.videogram.com/upload/"></iframe></div><div class="highslide-footer"><div><span class="highslide-resize" title="Resize"><span></span></span></div></div></div>
+
+
+
