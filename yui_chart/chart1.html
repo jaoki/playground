@@ -28,6 +28,36 @@ YUI().use('charts', function (Y)
 		dataProvider: myDataValues, 
 		render: "#linechart",
 	});
+	var dataMaximum = linechart.getAxisByKey("values").get("dataMaximum");
+
+	// Line at 3500
+	var target = 3500;
+    var mygraphic = linechart.get("graph").get("gridlines").get("graphic"),
+        w = mygraphic.get("width"),
+        h = mygraphic.get("height"),
+        //set ycoordinate to 85%
+        ycoord = Math.round(h - (h * (target/dataMaximum))),
+        myshape,
+        //store current state of Graphic's autoDraw attribute
+        autoDraw = mygraphic.get("autoDraw");
+    //set graphic's autoDraw attribute to true    
+    mygraphic.set("autoDraw", true);
+    //create and style path shape
+    myshape = mygraphic.addShape({
+        type: "path",
+        stroke: {
+            color: "#f00",
+            weight: 3,
+        }
+    });
+    //draw the line at 85%
+    myshape.clear();
+    myshape.moveTo(0, ycoord);
+    myshape.lineTo(w, ycoord);
+    myshape.end();
+    //set the graphic's autoDraw attribute to its previous state
+    mygraphic.set("autoDraw", autoDraw);
+	
 
 	var pieGraph = new Y.Chart({
 		render:"#piechart", 
